@@ -8,6 +8,6 @@ COPY assets/font_dir ${LAMBDA_TASK_ROOT}/font_dir
 COPY assets/run.sh assets/pdf_to_png ${LAMBDA_TASK_ROOT}/
 RUN chmod +x ./run.sh ./pdf_to_png
 
-RUN ./pdf_to_png -h > /dev/null
+RUN ./pdf_to_png -h 2>&1 | grep -q "pdftopng version"
 
 ENTRYPOINT [ "/bin/sh", "/var/task/run.sh" ]
